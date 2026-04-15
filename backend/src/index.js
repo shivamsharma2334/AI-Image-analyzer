@@ -32,9 +32,13 @@ app.use("/api", analyzeRouter);
 const publicDir = path.resolve(__dirname, "public");
 if (existsSync(publicDir)) {
   app.use(express.static(publicDir));
-  // SPA fallback for client-side routes like /history, /stats
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(publicDir, "index.html"));
+  // SPA fallback for client-side routes like /history, /stats.
+  // Express 5 rejects "*" route patterns, so use a terminal middleware.
+  app.use((req, res) => {
+    if (req.path.startsWith("/api")) {
+      return res.status(404).json({ error: "Not Found", message: "API route not found" });
+    }
+    return res.sendFile(path.join(publicDir, "index.html"));
   });
 }
 
