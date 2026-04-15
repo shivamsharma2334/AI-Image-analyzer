@@ -1,0 +1,22 @@
+{
+  "name": "ai-image-analyzer-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --enable-source-maps src/index.js",
+    "build": "node ./build.mjs",
+    "start": "node --enable-source-maps ./dist/index.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^1.44.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^5.1.0",
+    "multer": "^2.0.0",
+    "openai": "^4.102.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
